@@ -21,8 +21,8 @@ user = "kai"
 password = "dog8code"
 
 [models]
-provider = "ChatIBMGenAI"
+provider = "AzureOpenAI"
 
 [models.args]
-model_id = "meta-llama/llama-3-70b-instruct"
-parameters.max_new_tokens = 2048
+deployment_name = "gpt-35"
+openai_api_version = "2024-06-01"

@@ -3,7 +3,7 @@ import os
 from genai import Client, Credentials
 from genai.extensions.langchain.chat_llm import LangChainChatInterface
 from genai.schema import DecodingMethod
-from langchain_community.chat_models import BedrockChat, ChatOllama, ChatOpenAI
+from langchain_community.chat_models import BedrockChat, ChatOllama,AzureChatOpenAI,ChatOpenAI
 from langchain_community.chat_models.fake import FakeListChatModel
 from langchain_core.language_models.chat_models import BaseChatModel
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -42,6 +42,21 @@ class ModelProvider:
 
                 defaults = {
                     "model": "gpt-3.5-turbo",
+                    "temperature": 0.1,
+                    # "model_kwargs": {
+                    #     "max_tokens": None,
+                    # },
+                    "streaming": True,
+                }
+
+                model_args = deep_update(defaults, config.args)
+                model_id = model_args["model"]
+
+            case "AzureOpenAI":
+                model_class = AzureChatOpenAI
+
+                defaults = {
+                    "model": "gpt-35",
                     "temperature": 0.1,
                     # "model_kwargs": {
                     #     "max_tokens": None,
